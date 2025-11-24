@@ -8,6 +8,7 @@ for i in s:
     c=xor(ord(i),13)
     b=b+chr(c)
 print(b)
+
 #property
 KEY1 = bytes_to_long(bytes.fromhex('a6c8b6733c9b22de7bc0253266a3867df55acde8635e19c73313'))
 KEY2KEY1 = bytes_to_long(bytes.fromhex('37dcb292030faa90d07eec17e3b1c6d8daf94c35d4c9191a5e1e'))
@@ -15,3 +16,30 @@ KEY2KEY3 = bytes_to_long(bytes.fromhex('c1545756687e7573db23aa1c3452a098b71a7fbf
 FLAGKEY1KEY3KEY2 = bytes_to_long(bytes.fromhex('04ee9855208a2cd59091d04767ae47963170d1660df7f56f5faf'))
 x=xor(FLAGKEY1KEY3KEY2,KEY2KEY3)
 print(long_to_bytes(xor(x,KEY1)))
+
+#favbytes
+ct = bytes.fromhex("73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d")
+
+for key in range(256):
+    try:
+        pt = xor(ct, key).decode()
+        if 'crypto' in pt:
+            print(f"key: {key} - flag: {pt}")
+    except UnicodeDecodeError:
+        pass
+
+#youknow crypto or you dont
+flag = bytes.fromhex('0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104')
+print(xor(flag, 'myXORkey'.encode()))
+##found out key by putting crypto{ in place of myxorkey and got mcryptoke and guessed the y to key the word key and tried it and gave the flag
+
+#lemurxor
+
+from PIL import ImageChops,Image
+img1 = Image.open('flag.png')
+img2 = Image.open('lemur.png')
+sol=ImageChops.subtract(img1,img2)
+sol.show()
+
+
+
